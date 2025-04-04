@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Interactive Location Map</title>
+  <meta charset="utf-8" />
+  <style>
+    #map { height: 100vh; width: 100%; margin: 0; padding: 0; }
+    body { margin: 0; padding: 0; }
+    .leaflet-control-attribution {
+      font-size: 10px;
+      bottom: 5px !important;
+      right: 5px !important;
+      background: rgba(255, 255, 255, 0.6);
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+  var map = L.map('map').setView([53.6, -0.7], 8);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  const locations = [
+    {
+      name: "Scunthorpe",
+      lat: 53.579,
+      lng: -0.654,
+      url: "https://www.kingswaygroundmaintenance.co.uk/location/scunthorpe/"
+    },
+    {
+      name: "Hull",
+      lat: 53.744,
+      lng: -0.332,
+      url: "https://www.kingswaygroundmaintenance.co.uk/location/hull/"
+    },
+    {
+      name: "Doncaster",
+      lat: 53.5228,
+      lng: -1.1286,
+      url: "https://www.kingswaygroundmaintenance.co.uk/location/doncaster/"
+    }
+  ];
+
+  locations.forEach(loc => {
+    L.marker([loc.lat, loc.lng])
+      .addTo(map)
+      .bindPopup(`<b>${loc.name}</b><br><a href="${loc.url}" target="_blank">View Location</a>`);
+  });
+</script>
+
+</body>
+</html>
